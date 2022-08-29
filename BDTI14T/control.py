@@ -29,7 +29,14 @@ class control:
         endereco = input()
         print("Informe o seu data de nascimento:")
         dataDeNascimento = input()
-        print(self.modelo.inserir(nome, telefone, endereco, dataDeNascimento))
+        print(self.modelo.inserir(nome, telefone, endereco, self.transformarData(dataDeNascimento)))
+
+    def transformarData(self, texto):
+        separado = texto.split('/')
+        dia = separado[0]
+        mes = separado[1]
+        ano = separado[2]
+        return "{}-{}-{}".format(ano, mes, dia)
 
     def operacoes(self):
         while self.getOpcao() != 0:
@@ -38,6 +45,8 @@ class control:
                 print("Obrigado!")
             elif self.getOpcao() == 1:
                 self.cadastrar()
+            elif self.getOpcao() == 2:
+                print(self.modelo.selecionar())
 
             else:
                 print("Opção inválida! Tente novamente.")

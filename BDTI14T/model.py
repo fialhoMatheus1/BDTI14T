@@ -15,3 +15,15 @@ class model:
             return "{} linha(s) afetada(s)".format(self.con.rowcount) #Rowcount é uma variavel da classe mysql
         except Exception as erro:
             return erro
+
+    def selecionar(self):
+        try:
+            sql = "select * from pessoa"
+            self.con.execute(sql)#Devolve os dados salvos
+            msg = ""
+            for(codigo, nome, telefone, endereco, dataDeNascimento) in self.con:
+                msg += "\nCoódigo: {}, Nome: {}, Telefone: {}, Endereço: {}, Data de Nascimento: {}".format(codigo, nome, telefone, endereco, dataDeNascimento)
+            return msg
+
+        except Exception as erro:
+            return erro
