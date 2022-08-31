@@ -24,6 +24,23 @@ class model:
             for(codigo, nome, telefone, endereco, dataDeNascimento) in self.con:
                 msg += "\nCoódigo: {}, Nome: {}, Telefone: {}, Endereço: {}, Data de Nascimento: {}".format(codigo, nome, telefone, endereco, dataDeNascimento)
             return msg
+        except Exception as erro:
+            return erro
 
+    def atualizar(self, campo, novoDado, cod):
+        try:
+            sql = "update pessoa set {} = '{}' where codigo = '{}'".format(campo, novoDado, cod)
+            self.con.execute(sql)
+            self.db_connection.commit()
+            return "{} linha(s) atualizada(s)!".format(self.con.rowcount)
+        except Exception as erro:
+            return erro
+
+    def excluir(self, cod):
+        try:
+            sql = "delete from pessoa where codigo = '{}'".format(cod)
+            self.con.execute(sql)
+            self.db_connection.commit()
+            print("{} linha(s) excluída(s)!".format(self.con.rowcount))
         except Exception as erro:
             return erro
